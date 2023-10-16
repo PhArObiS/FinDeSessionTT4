@@ -1,0 +1,57 @@
+<!-- Display any messages (errors, notifications, etc.) -->
+<app-message></app-message>
+
+<!-- Filter input for courses -->
+<!-- This input allows users to filter the courses table. The filter is applied as the user types. -->
+<mat-form-field>
+  <input #filterInput matInput (keyup)="applyFilter(filterInput.value)" placeholder="Filter Courses">
+</mat-form-field>
+
+<!-- Courses Grid -->
+<!-- This div contains the table displaying the courses. The table is scrollable. -->
+<div id="gridCourse">
+    <!-- The table uses Angular Material's mat-table directive for styling and structure. -->
+    <table mat-table [dataSource]="gridCourse" matSort>
+        <!-- Semester Column -->
+        <ng-container matColumnDef="Semester">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Session</th>
+            <td mat-cell *matCellDef="let course">{{course.Semester}}</td>
+        </ng-container>
+
+        <!-- Department Column -->
+        <ng-container matColumnDef="Department">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Departements</th>
+            <td mat-cell *matCellDef="let course">{{course.Department}}</td>
+        </ng-container>
+
+        <!-- Course Column -->
+        <ng-container matColumnDef="Course">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cours</th>
+            <td mat-cell *matCellDef="let course">{{course.Course}}</td>
+        </ng-container>        
+
+        <!-- Teacher Column -->
+        <ng-container matColumnDef="Teacher">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Professeur</th>
+            <td mat-cell *matCellDef="let course">{{course.Teacher}}</td>
+        </ng-container>
+
+        <!-- Header and Rows Definition -->
+        <!-- This defines how the header and rows of the table should be structured. -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="displayCourseInfo(row)"></tr>
+    </table>
+</div>
+
+<!-- Student Information and Grid (if necessary) -->
+<!-- This section displays additional information and possibly another table if a course is selected. -->
+<div *ngIf="selectedCourse">
+    <!-- Display selected course information here -->
+
+    <!-- Students Grid -->
+    <div id="studentGrid">
+        <table mat-table [dataSource]="studentDataSource">
+            <!-- Define your student columns here... -->
+        </table>
+    </div>
+</div>

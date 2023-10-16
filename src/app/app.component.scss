@@ -1,0 +1,43 @@
+#menu
+{
+    height:5vh;
+    padding:1vh 1vw;
+    border-bottom:2px solid black;
+
+    a
+    {
+        display:block;
+        float:left;
+        width:15vw;
+        font-size:3vh;
+        text-decoration:none;
+        text-align:center;
+        border-right:1px solid black;       
+        
+
+    }
+}
+
+#content
+{
+    height:80vh;
+}
+
+a.selected
+{
+    background-color:rgb(182, 111, 111);
+}
+
+.logoutButton {
+    background-color: #f44336;  // Red color
+    color: white;  // White text color
+    border: none;  // No border
+    padding: 10px 20px;  // Some padding
+    cursor: pointer;  // Hand cursor on hover
+    border-radius: 5px;  // Rounded corners
+  
+    &:hover {
+      background-color: #d32f2f;  // Darker red on hover
+    }
+  }
+  

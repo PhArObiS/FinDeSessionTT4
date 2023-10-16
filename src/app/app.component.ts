@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from "@angular/router";
+import { SecurityService } from './security.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'FinDeSessionTT4';
+
+  title = 'connection';
+
+  constructor(public security: SecurityService, private router: Router) {}
+
+  ngOnInit() {
+    if (!this.security.isConnected()) {
+        this.router.navigate(['login']);
+    }
+}
+
 }

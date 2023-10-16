@@ -1,0 +1,59 @@
+#menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 6vh;  /* Slightly increased height */
+    padding: 1vh 1vw;
+    background: linear-gradient(135deg, #e3e3e3, #f9f9f9); /* Soft gradient background */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+#menu-links {
+    display: flex;
+    align-items: center;
+}
+
+#menu-links a {
+    width: auto; /* Auto width to fit content */
+    margin: 0 10px; /* Consistent spacing between links */
+    font-size: 2.5vh; /* Adjusted font size */
+    font-weight: 500; /* Slightly bold */
+    text-decoration: none;
+    text-align: center;
+    color: #333; /* Dark gray color for better visibility */
+    transition: color 0.3s; /* Soft transition for hover effects */
+
+    &:hover {
+        color: #007BFF; /* Highlight color on hover */
+    }
+}
+
+#content {
+    height: 80vh;
+}
+
+a.selected {
+    background-color: #007BFF; /* A consistent highlight color */
+    color: white; /* White text color for selected item */
+    border-radius: 5px; /* Rounded corners for selected item */
+    padding: 5px 10px; /* Padding for selected item */
+}
+
+.logoutButton {
+    background: linear-gradient(135deg, #f44336, #d32f2f); /* Gradient background */
+    color: white;
+    border: none;
+    padding: 5px 15px; /* Reduced padding to make the button smaller */
+    font-size: 2.2vh;  /* Adjusted font size for smaller button */
+    font-weight: 500;  /* Slightly bold */
+    cursor: pointer;
+    border-radius: 20px; /* Highly rounded corners for buttons */
+    margin-left: auto; /* Push the button to the far right end of the flex container */
+    transition: background-color 0.3s, transform 0.3s; /* Transition for hover effects */
+
+    &:hover {
+        background: #d32f2f; /* Darker shade on hover */
+        transform: translateY(-2px); /* Slight lift on hover for interactive feel */
+    }
+}
+

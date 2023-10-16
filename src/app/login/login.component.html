@@ -1,0 +1,16 @@
+<app-message></app-message>
+
+<div id="loginForm">
+
+    <!-- Text input for the username with two-way data binding -->
+    <input type="text" placeholder="Username" [(ngModel)]="username" class="inputField" />
+    <br />
+
+    <!-- Password input for the user's password with two-way data binding -->
+    <input type="password" placeholder="Password" [(ngModel)]="password" class="inputField" />
+    <br />
+
+    <!-- Login button which triggers the btnLogin() method when clicked -->
+    <button (click)="btnLogin()" class="loginButton">Login</button>
+
+</div>

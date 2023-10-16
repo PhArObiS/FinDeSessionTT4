@@ -1,0 +1,12 @@
+<div id="menu">
+    <div id="menu-links">
+        <a [ngClass]="{'selected' : IsCoursSelected()}" *ngIf="security.isConnected()" routerLink="/home/courses" routerLinkActive="active" ariaCurrentWhenActive="page">Cours</a>
+        <a [ngClass]="{'selected' : IsEtudiantsSelected()}" *ngIf="security.isConnected()" routerLink="/home/students" routerLinkActive="active" ariaCurrentWhenActive="page">Etudiants</a>
+    </div>
+    
+    <!-- Logout Button -->
+    <button *ngIf="security.isConnected()" (click)="logout()" class="logoutButton">Logout</button>
+
+    <div style="clear:both;"></div>
+</div>
+<router-outlet></router-outlet>
