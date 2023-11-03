@@ -1,0 +1,120 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+}
+
+mat-form-field {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#gridStudent {
+    width: 100%;
+    height: 36vh;
+    overflow-y: auto;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table tr td:first-child {
+    border-radius: 10px 0 0 10px;
+    width: 6em;
+}
+
+/* Define cell padding and border styles for the table */
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid #ebebeb;
+    text-align: left;
+}
+
+th {
+    background-color: #f5f5f5;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+  overflow-y: auto;
+}
+
+.student-card {
+  flex: 1;
+  height: 20%;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  margin: 0 10px;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.student-info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.student-info-table th, .student-info-table td {
+  padding: 0px;
+  border-bottom: 1px solid #ebebeb;
+  text-align: left;
+}
+
+.student-info-table th {
+  background-color: #b2d7ff;
+  border-radius: 5px 5px 0 0;
+}
+
+label {
+    font-weight: bold;
+    font-size: 12px;
+    color: #666666;
+    width: 150px;
+    margin-left: 3px;
+    padding: 2px;
+    display: left;
+}
+
+input {
+    width: 50%;
+    padding: 6px 12px;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #666666;
+    color: white;
+    margin-top:10px;
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #4d4747;
+}
+
+.empty-row {
+    text-align: center;
+    font-style: italic;
+}
+

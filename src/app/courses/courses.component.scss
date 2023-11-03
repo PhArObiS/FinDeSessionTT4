@@ -74,21 +74,33 @@ tr:hover {
 }
 
 /* Define styles for the remove student button */
-button {
-    background-color: #f44336; /* Red */
-    color: white;
-    padding: 6px 12px;
+/* Button Styles */
+button[mat-button] {
+    border-radius: 8px;
+    padding: 8px 12px;
     border: none;
-    cursor: pointer;
-    border-radius: 4px;
+    font-weight: 600;
+    margin: 0 5px; /* Padding between buttons */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
-    background-color: #da190b; /* Darker red */
+button[mat-button]:hover {
+    transform: scale(1.05);
 }
 
-.empty-row {
-    text-align: center;
-    font-style: italic;
+button[mat-button]:active {
+    transform: scale(0.98);
 }
+
+/* Specific Button Colors */
+.update-btn {
+    background-color: rgb(248, 112, 1);
+    color: #fff;
+}
+
+.remove-btn {
+    background-color: red;
+    color: #fff;
+}
+
 

@@ -25,6 +25,7 @@ export class DataService {
     return `${this.BASE_URL}?method=${method}&parameters=${JSON.stringify({ parameters })}`;
   }
 
+  // { GET }
   AccountValidate(user: string, password: string): Observable<CollegeResponse> {
     let method: string = "AccountValidate";
     let parameters = [user, password];
@@ -43,19 +44,41 @@ export class DataService {
   }
 
   CourseSemesterStudentGetAll(CourseSemesterId: number): Observable<CollegeResponse> {
-    if (CourseSemesterId === undefined || CourseSemesterId === null) {
-      return new Observable<CollegeResponse>(observer => {
-        observer.error({
-          status: 'error',
-          message: 'Invalid CourseSemesterId',
-          data: null
-        });
-      });
-    }
+    let method: string = "CourseSemesterStudentGetAll";
+    let parameters = [CourseSemesterId.toString()];
+    let urlToCall = this.constructUrl(method, parameters);
 
-    let urlToCall = this.constructUrl("CourseSemesterStudentGetAll", [CourseSemesterId.toString()]);
     return this.http.get<CollegeResponse>(urlToCall).pipe(
       catchError(this.handleError<CollegeResponse>('CourseSemesterStudentGetAll'))
+    );
+  }
+  
+  PersonGetAll(Role: string): Observable<CollegeResponse> {
+    let urlToCall = this.constructUrl("PersonGetAll", [Role]);
+    return this.http.get<CollegeResponse>(urlToCall).pipe(
+      catchError(this.handleError<CollegeResponse>('PersonGetAll'))
+    );
+  }
+
+  // { POST }
+  CourseSemesterStudentInsert(CourseSemesterId: number, StudentId: number): Observable<CollegeResponse> {
+    let method: string = "CourseSemesterStudentInsert";
+    let parameters = [CourseSemesterId.toString(), StudentId.toString()];
+    let urlToCall = this.constructUrl(method, parameters);
+    
+    return this.http.post<CollegeResponse>(urlToCall, parameters).pipe(
+      catchError(this.handleError<CollegeResponse>('CourseSemesterStudentInsert'))
+      );
+    }
+    
+  // { PATCH }
+  CourseSemesterUpdateTeacher(CourseSemesterId: number, TeacherId: number): Observable<CollegeResponse> {
+    let method: string = "CourseSemesterUpdateTeacher";
+    let parameters = [CourseSemesterId.toString(), TeacherId.toString()];
+    let urlToCall = this.constructUrl(method, parameters);
+    
+    return this.http.patch<CollegeResponse>(urlToCall, parameters).pipe(
+      catchError(this.handleError<CollegeResponse>('CourseSemesterUpdateTeacher'))
     );
   }
 
@@ -63,10 +86,21 @@ export class DataService {
     let method: string = "CourseSemesterStudentUpdateGrade";
     let parameters = [Id.toString(), StudentId.toString(), Grade.toString()];
     let urlToCall = this.constructUrl(method, parameters);
-
+    
     return this.http.patch<CollegeResponse>(urlToCall, parameters).pipe(
       catchError(this.handleError<CollegeResponse>('CourseSemesterStudentUpdateGrade'))
     );
+  }
+
+  // { PUT }
+  PersonUpdateInfo(PersonId: number, FirstName: string, LastName: string, Phone: string, Email: string): Observable<CollegeResponse> {
+    let method: string = "PersonUpdateInfo";
+    let parameters = [PersonId.toString(), FirstName, LastName, Phone, Email]
+    let urlToCall = this.constructUrl(method, parameters);
+
+    return this.http.put<CollegeResponse>(urlToCall, parameters).pipe(
+      catchError(this.handleError<CollegeResponse>('PersonUpdateInfo'))
+    );  
   }
 
   CourseSemesterStudentDelete(Id: number, studentId: number): Observable<CollegeResponse> {
@@ -80,18 +114,8 @@ export class DataService {
     return this.http.delete<CollegeResponse>(urlToCall).pipe(
       catchError(this.handleError<CollegeResponse>('CourseSemesterStudentDelete'))
     );
-}
-
-getTeachers(): Observable<CollegeResponse> {
-  let urlToCall = this.constructUrl("CourseSemesterGetAll", []);
-  return this.http.get<CollegeResponse>(urlToCall).pipe(
-    catchError(this.handleError<CollegeResponse>('CourseSemesterGetAll'))
-  );
-}
-
-
-
-
+  }
+  
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

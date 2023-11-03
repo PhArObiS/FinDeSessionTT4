@@ -38,6 +38,5 @@ export class LoginComponent {
         console.log("Error during login: ", error);
       }
     );
-}
-
+  }
 }

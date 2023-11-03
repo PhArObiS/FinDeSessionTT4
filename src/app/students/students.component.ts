@@ -1,79 +1,72 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../data.service';
-
-import { MatTableModule } from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table';
-
-import { MessageComponent } from '../message/message.component';
-
+import { MatSort } from '@angular/material/sort';
+import { Injectable } from '@angular/core';
 
 interface CollegeResponse {
   status: string;
-  message:string;
-  data:any;
+  message: string;
+  data: any;
 }
 
-interface Customer {
-  Id:number,
-  FirstName:string,
-  LastName:string,
-  Phone:string,
-  Email:string,
-  Created:Date,
-  Role:string
+interface Student {
+  Id: number;
+  FirstName: string;
+  LastName: string;
+  Phone: string;
+  Email: string;
 }
+
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.scss']
 })
-export class StudentsComponent {}
 
-// {
+export class StudentsComponent implements OnInit {
+  public gridStudents: MatTableDataSource<Student> = new MatTableDataSource<Student>([]);
 
-//   public gridCustomers:MatTableDataSource<Customer>;
-//   displayedColumns : any[] = ['firstName', 'lastName', 'phone', 'email'];
+  displayedColumns: string[] = ['FirstName', 'LastName', 'Phone', 'Email'];
+  selectedStudent: Student = { Id: 0, FirstName: '', LastName: '', Phone: '', Email: ''};
 
-//   constructor(private data: DataService) 
-//   { 
-//     this.gridCustomers = new MatTableDataSource<Customer>;
-//   }
+  @ViewChild(MatSort) sort!: MatSort;
 
-//   @ViewChild(MessageComponent) msg!: MessageComponent;  
+  constructor(private dataService: DataService) {}
 
-//   ngOnInit()
-//   {
-    
-//     this.data.getCustomers().subscribe((response: BikeResponse) => this.customerGetAllObserved(response));
+  ngAfterViewInit() {
+    this.gridStudents.sort = this.sort;
+  }
 
-//   }
+  ngOnInit(): void {
+    this.fetchStudentList();
+  }
 
-  // customerGetAllObserved(response: BikeResponse)
-  // {
+  applyFilter(filterValue: string): void {
+    this.gridStudents.filter = filterValue.trim().toLowerCase();
+  }
+  
+  fetchStudentList(): void {
+    this.dataService.PersonGetAll('student').subscribe(response => {
+      if (response.status === 'success') {
+        this.gridStudents.data = response.data;
+      } else {
+        console.error('Failed to fetch students', response.message);
+      }
+    });
+  }
+  
+  displayStudentInfo(student: Student) {
+    this.selectedStudent = student;
+  }
 
-  //   console.log("customerGetAllObserved");
-  //   console.log(response);
-    
-  //   if (response.status == "success")
-  //   {
-  //     this.gridCustomers = new MatTableDataSource(response.data);
-  //   }
-  //   else
-  //   {
-  //     console.log("customerGetAllObserved failed");
-  //     console.log(response.message);      
-  //   }
-
-  // }  
-
-  // onRowClicked(customer:Customer)
-  // {
-  //   console.log("onRowClicked");
-  //   console.log(customer);
-
-
-  // }
-
-
- 
-
+  updateStudent(student: any): void {
+    this.dataService.PersonUpdateInfo(student.Id, student.FirstName, student.LastName, student.Phone, student.Email).subscribe(response => {
+      if (response.status === 'success') {
+        console.log('Les informations sur les étudiants ont été mises à jour avec succès.');
+      } else {
+        console.error('Failed to update student info.', response.message);
+      }
+    });
+  }
+}
